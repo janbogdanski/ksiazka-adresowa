@@ -81,7 +81,7 @@ int AddressBook::update(const int& id, const Record& record){
 }
 
 void AddressBook::print(){
-
+	system("cls");
 
 
 	for(int i = 0; i < records.size(); i++){
@@ -95,8 +95,13 @@ void AddressBook::print(){
 	cout << "print ksiazki" << endl;
 }
 void AddressBook::reload(){
+	if( !data.is_open() ){
 
-	data.open("base.txt");//, ios::in | ios::out);
+		data.open("base.txt");
+	}
+
+	if( !data.is_open() )
+		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
 	Record record;
 	int i, count, length;
 	data.seekg(0, ios::end);
@@ -105,12 +110,30 @@ void AddressBook::reload(){
 	count = length/sizeof(record);
 	data.seekg(0, ios::beg);
 
+	records.clear();
+
 	for(i=0; i < count; i++)
 	{
 		data.read((char*)&record, sizeof(record));
 		records.push_back(record);
 	}
 
+}
+
+void AddressBook::writeDb(){
+
+	//data.close;
+	data.close();
+	remove("base.txt");
+	cout << 'asdf';
+	if( !data.is_open() )
+		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
+
+	for(int i = 0; i < records.size(); i++){
+
+		data.write((const char*)&records[i], sizeof(records[i]));
+
+	}
 }
 
 

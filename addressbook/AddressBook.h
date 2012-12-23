@@ -30,5 +30,6 @@ public:
 
 private:
 	void reload();
+	void writeDb();
 	//data;
 };
