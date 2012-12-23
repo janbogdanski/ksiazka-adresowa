@@ -31,14 +31,49 @@ int AddressBook::insert(){
 
 	return 1;
 }
-int AddressBook::del(const int& id){
+int AddressBook::rm(){
+
+	Record record;
+	bool rewrite = false;
+	string search;
+	cout << "podaj nazw";
+	cin >> search;
+
+	for(int i = 0; i < records.size(); i++){
+		if(search.compare(records[i].surname) == 0){
+
+			//znaleziono
+			rewrite = true;
+			records.erase(records.begin() + i);
+			//cout << records[i].surname << " " << search.compare(records[i].surname) << endl;
+		}
+	}
+
+	if(rewrite){
+
+		writeDb();
+		reload();
+	}
 
 	return 1;
 }
-int AddressBook::read(const int& id){
+Record AddressBook::find(){
 
-	return 1;
+	Record record;
+	string search;
+	cout << "podaj nazw";
+	cin >> search;
 
+	for(int i = 0; i < records.size(); i++){
+		if(search.compare(records[i].surname) == 0){
+
+			//znaleziono
+			return records[i];
+
+			//cout << records[i].surname << " " << search.compare(records[i].surname) << endl;
+		}
+	}
+	return record;
 }
 int AddressBook::update(const int& id, const Record& record){
 

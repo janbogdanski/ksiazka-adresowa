@@ -18,8 +18,8 @@ public:
 	//AddressBook(const int& in);
 
 	int insert();
-	int del(const int& id);
-	int read(const int& id);
+	int rm();
+	Record find();
 	int update(const int& id, const Record& record);
 
 	void print();
