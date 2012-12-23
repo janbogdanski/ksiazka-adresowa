@@ -1,20 +1,34 @@
 #include "Record.h"
 
+/*
+Konstruktor!
+*/
 Record::Record(void)
 {
 }
 
+/*
+
+*/
 Record::~Record(void)
 {
 }
 
 
+/*
+Wypisywanie zaeartosci rekordu na ekran
+*/
 void Record::print(){
 
-	cout << "print record" << endl;
-	cout << name << " " << surname << " " << phone << " " << address << endl;
+	cout << "\tname: " << name << endl;
+	cout << "\tsurname: " << surname << endl;
+	cout << "\taddress: " << address << endl;
+	cout << "\tphone: " << phone << endl << endl;;
 }
 
+/*
+Tworzenie rekordu
+*/
 Record Record::create(){
 
 	cout << "Podaj imie: ";

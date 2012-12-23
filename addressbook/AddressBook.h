@@ -20,8 +20,6 @@ public:
 	int insert();
 	int rm();
 	Record find();
-	int update(const int& id, const Record& record);
-
 	void print();
 
 	~AddressBook();

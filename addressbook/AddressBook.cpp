@@ -1,133 +1,169 @@
-
-
 #include "AddressBook.h"
 
+/*
+Konstruktor!
+*/
 AddressBook::AddressBook()
 {
 	reload();
 }
 
+/*
+Dodawanie rekordu do ksiazki
 
+Tworzy instancje Record (cin wciaga odpowiednie dane) i zapisuje na koncu ksiazki
+*/
 int AddressBook::insert(){
 
 	Record record;
 	record.create();
 
 	data.seekg(0, ios::end);
-	//cout << "qq";
-	//record.print();
 	data.write((const char*)&record, sizeof(record));
 	reload();
 
 
 	return 1;
 }
+
+/*
+Usuwanie rekordu
+*/
 int AddressBook::rm(){
 
-	Record record;
+	//czy wymagamy ponownego wczytania DB? Po usunieciu tak
 	bool rewrite = false;
+
+	//wyszukiwane slowo(nazwisko)
 	string search;
-	cout << "podaj nazw";
+	cout << "Wpisz nazwisko osoby do usuniecia: ";
 	cin >> search;
 
 	for(int i = 0; i < records.size(); i++){
 		if(search.compare(records[i].surname) == 0){
 
-			//znaleziono
+			//znaleziono rekord w bazie - usuwamy go i wczytujemy baze ponownie
 			rewrite = true;
 			records.erase(records.begin() + i);
-			//cout << records[i].surname << " " << search.compare(records[i].surname) << endl;
 		}
 	}
 
 	if(rewrite){
 
+		//po modyfikacji vectora, aktualizujemy tez plik zrodlowy i wczytujemy go ponownie
 		writeDb();
 		reload();
 	}
 
 	return 1;
 }
+
+/*
+Wyszukiwanie rekordow po nazwisku
+*/
 Record AddressBook::find(){
 
-	Record record;
+	bool found = false;
 	string search;
-	cout << "podaj nazw";
+	cout << "Wpisz nazwisko osoby do wyszukania: ";
 	cin >> search;
 
 	for(int i = 0; i < records.size(); i++){
 		if(search.compare(records[i].surname) == 0){
 
 			//znaleziono
+			found = true;
 			return records[i];
-
-			//cout << records[i].surname << " " << search.compare(records[i].surname) << endl;
 		}
 	}
-	return record;
+	if(!found){
+		//todo moze jakos da sie przechwycic aby zwrocic false? except?
+		Record record;
+		return record;
+	}
 }
-int AddressBook::update(const int& id, const Record& record){
 
-	return 1;
-}
 
+/*
+Wypisywanie calej ksiazki na 'ekran'
+*/
 void AddressBook::print(){
 	system("cls");
 
 
 	for(int i = 0; i < records.size(); i++){
 		cout << "wpis " << i + 1<<endl;
-		cout << "\tname: " << records[i].name << endl;
-		cout << "\tsurname: " << records[i].surname << endl;
-		cout << "\taddress: " << records[i].address << endl;
-		cout << "\tphone: " << records[i].phone << endl << endl;;
-
+		records[i].print();
 	}
-	cout << "print ksiazki" << endl;
 }
+
+/*
+Wczytywanie bazy z pliku do wektora, na ktorym dalej operujemy
+*/
 void AddressBook::reload(){
+
+
 	if( !data.is_open() ){
 
+		//jesli plik istnieje, ale nie jest jeszcze otwarty
 		data.open("base.txt");
 	}
 
-	if( !data.is_open() )
-		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
-	Record record;
-	int i, count, length;
-	data.seekg(0, ios::end);
+	if( !data.is_open() ){
 
+		//jesli plik NIE istnieje, tworzymy go
+		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
+	}
+
+	//sprawdzamy dlugosc pliku i obliczamy ilosc iteracji (tzn wpisow) na podstawie size(record)
+	int i, count, length;
+	Record record;
+	data.seekg(0, ios::end);
 	length = data.tellg();
 	count = length/sizeof(record);
+
+	//wracamy na poczatek
 	data.seekg(0, ios::beg);
 
+	//czyscimy wektor (wazne!)
 	records.clear();
 
 	for(i=0; i < count; i++)
 	{
+		//wczytujemy w petli rekordy do wektora
 		data.read((char*)&record, sizeof(record));
 		records.push_back(record);
 	}
-
 }
 
+
+/*
+Zapis bazy na dysk, na podstawie zawartosci wektora
+
+Operacje przebiegaja na wektorze, aby pozniej byly dostepne, zapisujemy je do pliku
+*/
 void AddressBook::writeDb(){
 
-	//data.close;
+	//zamykamy i usuwamy plik (najprostszy sposob na otrzymanie pustego pliku.. :)
 	data.close();
 	remove("base.txt");
-	cout << 'asdf';
-	if( !data.is_open() )
+
+	//tworzymy plik
+	if(!data.is_open()){
+
 		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
+	}
 
 	for(int i = 0; i < records.size(); i++){
 
+		//w petli wpisujemy zawartosc wektora do pliku
 		data.write((const char*)&records[i], sizeof(records[i]));
-
 	}
 }
 
+/*
 
+*/
 AddressBook::~AddressBook()
 {
 }
