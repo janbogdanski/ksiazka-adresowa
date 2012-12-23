@@ -8,6 +8,7 @@ int main(){
 
 	AddressBook book = AddressBook();
 
+	book.insert();
 	book.print();
 	cout << "asdF" << endl;
 	return 1;
