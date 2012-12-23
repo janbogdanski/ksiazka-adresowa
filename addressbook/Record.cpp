@@ -15,4 +15,15 @@ void Record::print(){
 	cout << name << " " << surname << " " << phone << " " << address << endl;
 }
 
+Record Record::create(){
+
+	cout << "Podaj imie: ";
+	cin >> name;
+	cout << "Podaj nazwisko: ";
+	cin >> surname;
+	cout << "Podaj adres: ";
+	cin >> address;
+	return *this;
+}
+
 

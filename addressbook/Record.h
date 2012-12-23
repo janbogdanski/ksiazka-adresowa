@@ -5,7 +5,9 @@ class Record : public Base
 public:
 	Record(void);
 	~Record(void);
-		void print();
+	void print();
+	Record create();
+
 	string name, surname, address, phone;
 
 };

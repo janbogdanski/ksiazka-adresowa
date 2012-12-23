@@ -11,16 +11,7 @@ AddressBook::AddressBook()
 int AddressBook::insert(){
 
 	Record record;
-	//record.name = "n4";
-	//record.surname = "su4";
-	//record.address = "add4";
-	//record.phone = "ph4";
-	cout << "Podaj imie: ";
-	cin >> record.name;
-	cout << "Podaj nazwisko: ";
-	cin >> record.surname;
-	cout << "Podaj adres: ";
-	cin >> record.address;
+	record.create();
 
 	data.seekg(0, ios::end);
 	//cout << "qq";
