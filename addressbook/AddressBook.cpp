@@ -24,7 +24,7 @@ int AddressBook::insert(){
 
 	data.seekg(0, ios::end);
 	//cout << "qq";
-	record.print();
+	//record.print();
 	data.write((const char*)&record, sizeof(record));
 	reload();
 

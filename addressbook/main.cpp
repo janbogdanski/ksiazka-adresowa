@@ -12,15 +12,17 @@ int main(){
 
 	while(1){
 		system("cls");
-		cout << "Ksiazka adresowa" << endl<< endl;
+		cout << "Ksiazka adresowa" << endl << endl;
 		cout << "-----------------MENU----------" << endl<< endl;
 		cout << "1. Dodaj nowa osobe"<< endl;
 		cout << "2. Wyszukaj osobe po nazwisku"<< endl;
 		cout << "3. Drukuj ksiazke"<< endl;
-		cout << "4. usun osobe"<< endl<< endl;
+		cout << "4. Usun osobe"<< endl;
+		cout << "5. Zamknij"<< endl
+			<< endl;
 		cout << "-------------------------------"<< endl<< endl;
 
-		cout << "wybierz akcje:";
+		cout << "wybierz akcje: ";
 		cin >> action;
 		system("cls");
 		switch(action){
@@ -48,6 +50,8 @@ int main(){
 				system ("pause");
 
 
+				break;
+			case 5: exit(1);
 				break;
 			default:
 				book.print();
