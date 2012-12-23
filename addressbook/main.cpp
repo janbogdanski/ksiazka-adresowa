@@ -1,9 +1,13 @@
 #include <iostream>
+#include <exception>
 
+using namespace std;
+
+
+ 
 #include "AddressBook.h"
 #include "Record.h"
 
-using namespace std;
 int main(){
 
 	AddressBook book = AddressBook();
@@ -23,7 +27,7 @@ int main(){
 		cout << "-------------------------------"<< endl<< endl;
 
 		cout << "wybierz akcje: ";
-		cin >> action;
+		cin >> (int)action;
 		system("cls");
 		switch(action){
 
@@ -34,7 +38,12 @@ int main(){
 				break;
 
 			case 2:
+				try{
+
 				book.find().print();
+				}catch(exception& e){
+					cout <<e.what();
+				}
 				system ("pause");
 
 				break;

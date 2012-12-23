@@ -77,6 +77,7 @@ Record AddressBook::find(){
 		}
 	}
 	if(!found){
+		throw myexception("nie ma");
 		//todo moze jakos da sie przechwycic aby zwrocic false? except?
 		Record record;
 		return record;
