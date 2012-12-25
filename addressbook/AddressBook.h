@@ -8,11 +8,12 @@
 #include "Except.h"
 #include "Base.h"
 #include "Record.h"
+template <class T>
 class AddressBook :
 	public Base
 {
 public:
-	friend ostream & operator<< (ostream &out, const AddressBook& book);
+	friend ostream & operator<< (ostream &out, const AddressBook<T>& book);
 	fstream data;
 	//Record recordss[];
 	vector <Record> records;
@@ -25,7 +26,7 @@ public:
 	Record find();
 	void print();
 
-	~AddressBook();
+	//~AddressBook();
 
 
 

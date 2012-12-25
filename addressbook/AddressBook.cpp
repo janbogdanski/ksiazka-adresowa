@@ -1,10 +1,16 @@
 #include "AddressBook.h"
+#include <iostream>
+
+using namespace std;
+
 
 /*
 Konstruktor!
 */
-AddressBook::AddressBook()
+template <class T>
+AddressBook<T>::AddressBook()
 {
+	cout << "asdf";
 	reload();
 }
 
@@ -13,7 +19,8 @@ Dodawanie rekordu do ksiazki
 
 Tworzy instancje Record (cin wciaga odpowiednie dane) i zapisuje na koncu ksiazki
 */
-int AddressBook::insert(){
+template <class T>
+int AddressBook<T>::insert(){
 
 	Record record;
 	record.create();
@@ -29,7 +36,8 @@ int AddressBook::insert(){
 /*
 Usuwanie rekordu
 */
-int AddressBook::rm(){
+template <class T>
+int AddressBook<T>::rm(){
 
 	//czy wymagamy ponownego wczytania DB? Po usunieciu tak
 	bool rewrite = false;
@@ -61,7 +69,8 @@ int AddressBook::rm(){
 /*
 Wyszukiwanie rekordow po nazwisku
 */
-Record AddressBook::find(){
+template <class T>
+Record AddressBook<T>::find(){
 
 	bool found = false;
 	string search;
@@ -88,7 +97,8 @@ Record AddressBook::find(){
 /*
 Wypisywanie calej ksiazki na 'ekran'
 */
-void AddressBook::print(){
+template <class T>
+void AddressBook<T>::print(){
 	system("cls");
 
 	for(int i = 0; i < records.size(); i++){
@@ -102,7 +112,8 @@ void AddressBook::print(){
 /*
 Wczytywanie bazy z pliku do wektora, na ktorym dalej operujemy
 */
-void AddressBook::reload(){
+template <class T>
+void AddressBook<T>::reload(){
 
 
 	if( !data.is_open() ){
@@ -144,7 +155,8 @@ Zapis bazy na dysk, na podstawie zawartosci wektora
 
 Operacje przebiegaja na wektorze, aby pozniej byly dostepne, zapisujemy je do pliku
 */
-void AddressBook::writeDb(){
+template <class T>
+void AddressBook<T>::writeDb(){
 
 	//zamykamy i usuwamy plik (najprostszy sposob na otrzymanie pustego pliku.. :)
 	data.close();
@@ -166,11 +178,12 @@ void AddressBook::writeDb(){
 /*
 
 */
-AddressBook::~AddressBook()
-{
-}
-
-ostream & operator<< (ostream &out, const AddressBook& book){
+//template <class T>
+//AddressBook<T>::~AddressBook()
+//{
+//}
+template <class T>
+ostream & operator<< (ostream &out, const AddressBook<T>& book){
 
 	system("cls");
 
