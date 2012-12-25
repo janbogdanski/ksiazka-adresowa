@@ -12,6 +12,7 @@ class AddressBook :
 	public Base
 {
 public:
+	friend ostream & operator<< (ostream &out, const AddressBook& book);
 	fstream data;
 	//Record recordss[];
 	vector <Record> records;

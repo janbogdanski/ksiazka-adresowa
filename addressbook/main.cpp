@@ -3,7 +3,7 @@
 using namespace std;
 
 
- 
+
 #include "AddressBook.h"
 #include "Record.h"
 
@@ -11,7 +11,6 @@ int main(){
 
 	AddressBook book = AddressBook();
 	int action = 0;
-
 
 	while(1){
 		system("cls");
@@ -39,7 +38,8 @@ int main(){
 			case 2:
 				try{
 
-				book.find().print();
+					cout << book.find() << endl;
+					//book.find().print();
 				}catch(Except& e){
 					cout <<e.what();
 				}
@@ -48,7 +48,8 @@ int main(){
 				break;
 
 			case 3:
-				book.print();
+				cout << book;
+				//book.print();
 				system ("pause");
 
 

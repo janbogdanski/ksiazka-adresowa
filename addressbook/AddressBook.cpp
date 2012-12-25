@@ -91,10 +91,11 @@ Wypisywanie calej ksiazki na 'ekran'
 void AddressBook::print(){
 	system("cls");
 
-
 	for(int i = 0; i < records.size(); i++){
-		cout << "wpis " << i + 1<<endl;
-		records[i].print();
+		cout << "wpis " << i + 1 << endl;
+	
+		//records[i].print();
+		cout << records[i];
 	}
 }
 
@@ -167,4 +168,16 @@ void AddressBook::writeDb(){
 */
 AddressBook::~AddressBook()
 {
+}
+
+ostream & operator<< (ostream &out, const AddressBook& book){
+
+	system("cls");
+
+	out << "operatorem" << endl;
+	for(int i = 0; i < book.records.size(); i++){
+		out << "wpis " << i + 1<<endl;
+		out << book.records[i];
+	}
+	return out;
 }

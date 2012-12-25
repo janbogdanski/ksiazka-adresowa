@@ -41,3 +41,12 @@ Record Record::create(){
 }
 
 
+ostream & operator<< (ostream &out, const Record& record){
+
+	out << "operatorem" <<endl;
+	out << "\tname: " << record.name << endl;
+	out << "\tsurname: " << record.surname << endl;
+	out << "\taddress: " << record.address << endl;
+	out << "\tphone: " << record.phone << endl << endl;;
+return out;
+}
