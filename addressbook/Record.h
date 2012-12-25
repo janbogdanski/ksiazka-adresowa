@@ -1,4 +1,6 @@
 #pragma once
+#include "Except.h"
+
 #include "Base.h"
 class Record : public Base
 {

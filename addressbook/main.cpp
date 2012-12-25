@@ -1,5 +1,4 @@
 #include <iostream>
-#include <exception>
 
 using namespace std;
 
@@ -41,7 +40,7 @@ int main(){
 				try{
 
 				book.find().print();
-				}catch(exception& e){
+				}catch(Except& e){
 					cout <<e.what();
 				}
 				system ("pause");

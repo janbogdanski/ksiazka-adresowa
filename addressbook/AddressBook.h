@@ -3,9 +3,9 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include <exception>
 
 
+#include "Except.h"
 #include "Base.h"
 #include "Record.h"
 class AddressBook :
@@ -34,19 +34,3 @@ private:
 	//data;
 };
 
-class myexception: public exception
-{
-public:
-
-	myexception(const string& message):msg(message) {
-	}
-  virtual const char* what() const throw()
-  {
-    //return (const char*)&msg;
-    return msg.c_str();
-    //return &msg;
-  }
-private:
-	string msg;
-	//char msg;
-};
