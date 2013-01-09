@@ -8,8 +8,11 @@ public:
 	friend ostream & operator<< (ostream &out, const Record& record);
 	Record(void);
 	~Record(void);
-	void print();
-	Record create();
+	virtual void print(){};
+
+	virtual Record* create(){
+	return new Record();
+	};
 
 	string name, surname, address, phone;
 

@@ -15,8 +15,9 @@ Tworzy instancje Record (cin wciaga odpowiednie dane) i zapisuje na koncu ksiazk
 */
 int AddressBook::insert(){
 
-	Record record;
-	record.create();
+	Record* record = new FirmRecord();
+	//Record record;
+	record->create();
 
 	data.seekg(0, ios::end);
 	data.write((const char*)&record, sizeof(record));
@@ -39,14 +40,14 @@ int AddressBook::rm(){
 	cout << "Wpisz nazwisko osoby do usuniecia: ";
 	cin >> search;
 
-	for(int i = 0; i < records.size(); i++){
-		if(search.compare(records[i].surname) == 0){
+	//for(int i = 0; i < records.size(); i++){
+		//if(search.compare(records[i].surname) == 0){
 
 			//znaleziono rekord w bazie - usuwamy go i wczytujemy baze ponownie
-			rewrite = true;
-			records.erase(records.begin() + i);
-		}
-	}
+			//rewrite = true;
+			//records.erase(records.begin() + i);
+		//}
+	//}
 
 	if(rewrite){
 
@@ -68,14 +69,14 @@ Record AddressBook::find(){
 	cout << "Wpisz nazwisko osoby do wyszukania: ";
 	cin >> search;
 
-	for(int i = 0; i < records.size(); i++){
-		if(search.compare(records[i].surname) == 0){
+	//for(int i = 0; i < records.size(); i++){
+		//if(search.compare(records[i].surname) == 0){
 
 			//znaleziono
-			found = true;
-			return records[i];
-		}
-	}
+			//found = true;
+			//return records[i];
+		//}
+	//}
 	if(!found){
 		throw Except("nie ma");
 		//todo moze jakos da sie przechwycic aby zwrocic false? except?
@@ -91,12 +92,12 @@ Wypisywanie calej ksiazki na 'ekran'
 void AddressBook::print(){
 	system("cls");
 
-	for(int i = 0; i < records.size(); i++){
-		cout << "wpis " << i + 1 << endl;
+	//for(int i = 0; i < records.size(); i++){
+		//cout << "wpis " << i + 1 << endl;
 	
 		//records[i].print();
-		cout << records[i];
-	}
+		//cout << records[i];
+	//}
 }
 
 /*
@@ -119,7 +120,7 @@ void AddressBook::reload(){
 
 	//sprawdzamy dlugosc pliku i obliczamy ilosc iteracji (tzn wpisow) na podstawie size(record)
 	int i, count, length;
-	Record record;
+	Record* record;
 	data.seekg(0, ios::end);
 	length = data.tellg();
 	count = length/sizeof(record);
@@ -156,11 +157,11 @@ void AddressBook::writeDb(){
 		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
 	}
 
-	for(int i = 0; i < records.size(); i++){
+	//for(int i = 0; i < records.size(); i++){
 
 		//w petli wpisujemy zawartosc wektora do pliku
-		data.write((const char*)&records[i], sizeof(records[i]));
-	}
+		//data.write((const char*)&records[i], sizeof(records[i]));
+	//}
 }
 
 /*
@@ -175,9 +176,9 @@ ostream & operator<< (ostream &out, const AddressBook& book){
 	system("cls");
 
 	out << "operatorem" << endl;
-	for(int i = 0; i < book.records.size(); i++){
-		out << "wpis " << i + 1<<endl;
-		out << book.records[i];
-	}
+	//for(int i = 0; i < book.records.size(); i++){
+		//out << "wpis " << i + 1<<endl;
+		//out << book.records[i];
+	//}
 	return out;
 }

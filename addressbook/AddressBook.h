@@ -8,6 +8,7 @@
 #include "Except.h"
 #include "Base.h"
 #include "Record.h"
+#include "FirmRecord.h"
 class AddressBook :
 	public Base
 {
@@ -15,7 +16,7 @@ public:
 	friend ostream & operator<< (ostream &out, const AddressBook& book);
 	fstream data;
 	//Record recordss[];
-	vector <Record> records;
+	vector <Record*> records;
 	//vector <int> records;
 	AddressBook();
 	//AddressBook(const int& in);
