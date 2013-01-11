@@ -15,12 +15,15 @@ Tworzy instancje Record (cin wciaga odpowiednie dane) i zapisuje na koncu ksiazk
 */
 int AddressBook::insert(){
 
+	int type = 1;
 	Record* record = new FirmRecord();
 	//Record record;
+	//(&record).create();//->create();
 	record->create();
 
 	data.seekg(0, ios::end);
-	data.write((const char*)&record, sizeof(record));
+	data.write((const char*)&type, sizeof(int));
+	data.write((const char*)record, sizeof(FirmRecord));
 	reload();
 
 
@@ -40,13 +43,14 @@ int AddressBook::rm(){
 	cout << "Wpisz nazwisko osoby do usuniecia: ";
 	cin >> search;
 
+	
 	//for(int i = 0; i < records.size(); i++){
-		//if(search.compare(records[i].surname) == 0){
+	//if(search.compare(records[i].surname) == 0){
 
-			//znaleziono rekord w bazie - usuwamy go i wczytujemy baze ponownie
-			//rewrite = true;
-			//records.erase(records.begin() + i);
-		//}
+	//znaleziono rekord w bazie - usuwamy go i wczytujemy baze ponownie
+	//rewrite = true;
+	//records.erase(records.begin() + i);
+	//}
 	//}
 
 	if(rewrite){
@@ -62,26 +66,26 @@ int AddressBook::rm(){
 /*
 Wyszukiwanie rekordow po nazwisku
 */
-Record AddressBook::find(){
+int AddressBook::find(){
 
 	bool found = false;
 	string search;
 	cout << "Wpisz nazwisko osoby do wyszukania: ";
 	cin >> search;
 
-	//for(int i = 0; i < records.size(); i++){
-		//if(search.compare(records[i].surname) == 0){
+	for (it = records.begin(); it != records.end() ; ++it)
+	{
 
-			//znaleziono
-			//found = true;
-			//return records[i];
-		//}
-	//}
-	if(!found){
+	if((*it)->getSearchValue().compare(0,search.size(), search) == 0){
+		
+			found = true;
+			(*it)->print();
+		}
+	}
+	if(found){
+		return 1;
+	} else{
 		throw Except("nie ma");
-		//todo moze jakos da sie przechwycic aby zwrocic false? except?
-		Record record;
-		return record;
 	}
 }
 
@@ -92,9 +96,13 @@ Wypisywanie calej ksiazki na 'ekran'
 void AddressBook::print(){
 	system("cls");
 
-	//for(int i = 0; i < records.size(); i++){
+	for (it = records.begin(); it != records.end() ; ++it)
+	{
+		(*it)->print();
+	}
+	////for(int i = 0; i < records.size(); i++){
 		//cout << "wpis " << i + 1 << endl;
-	
+
 		//records[i].print();
 		//cout << records[i];
 	//}
@@ -117,25 +125,22 @@ void AddressBook::reload(){
 		//jesli plik NIE istnieje, tworzymy go
 		data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
 	}
-
-	//sprawdzamy dlugosc pliku i obliczamy ilosc iteracji (tzn wpisow) na podstawie size(record)
-	int i, count, length;
-	Record* record;
-	data.seekg(0, ios::end);
-	length = data.tellg();
-	count = length/sizeof(record);
-
-	//wracamy na poczatek
 	data.seekg(0, ios::beg);
+
+	int type;
+	FirmRecord *record = new FirmRecord();
+	Record *record2 = new FirmRecord();
 
 	//czyscimy wektor (wazne!)
 	records.clear();
 
-	for(i=0; i < count; i++)
-	{
+	while(! data.eof()) {
+		data.read((char*)&type,sizeof(int));
+		data.read((char*)record,sizeof(FirmRecord));
+
 		//wczytujemy w petli rekordy do wektora
-		data.read((char*)&record, sizeof(record));
-		records.push_back(record);
+		records.push_back(new FirmRecord(*record));
+		//records.push_back(record2);
 	}
 }
 
@@ -159,8 +164,8 @@ void AddressBook::writeDb(){
 
 	//for(int i = 0; i < records.size(); i++){
 
-		//w petli wpisujemy zawartosc wektora do pliku
-		//data.write((const char*)&records[i], sizeof(records[i]));
+	//w petli wpisujemy zawartosc wektora do pliku
+	//data.write((const char*)&records[i], sizeof(records[i]));
 	//}
 }
 
@@ -176,9 +181,13 @@ ostream & operator<< (ostream &out, const AddressBook& book){
 	system("cls");
 
 	out << "operatorem" << endl;
-	//for(int i = 0; i < book.records.size(); i++){
-		//out << "wpis " << i + 1<<endl;
-		//out << book.records[i];
+	//for (it = book.records.begin(); it != book.records.end() ; ++it)
+	//{
+	//(*it)->print();
 	//}
+	for(int i = 0; i < book.records.size(); i++){
+		out << "wpis " << i + 1<<endl;
+		out << book.records[i];
+	}
 	return out;
 }

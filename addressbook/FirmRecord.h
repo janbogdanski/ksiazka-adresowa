@@ -12,7 +12,9 @@ public:
 	void print();
 	Record* create();
 
+	string getSearchValue();
+
 	string name, phone, address;
 
-
+	int getSize(){ return sizeof(FirmRecord); }
 };

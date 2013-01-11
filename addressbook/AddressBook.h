@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-
+#include <algorithm>
 
 #include "Except.h"
 #include "Base.h"
@@ -17,13 +17,15 @@ public:
 	fstream data;
 	//Record recordss[];
 	vector <Record*> records;
+	vector <Record*>::iterator it;
+
 	//vector <int> records;
 	AddressBook();
 	//AddressBook(const int& in);
 
 	int insert();
 	int rm();
-	Record find();
+	int find();
 	void print();
 
 	~AddressBook();

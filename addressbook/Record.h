@@ -2,7 +2,7 @@
 #include "Except.h"
 
 #include "Base.h"
-class Record : public Base
+class Record// : public Base
 {
 public:
 	friend ostream & operator<< (ostream &out, const Record& record);
@@ -11,10 +11,10 @@ public:
 	virtual void print(){};
 
 	virtual Record* create(){
-	return new Record();
+		return new Record();
 	};
-
-	string name, surname, address, phone;
+	virtual string getSearchValue(){ return string();};
+	//string name, surname, address, phone;
 
 };
 

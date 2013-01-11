@@ -10,14 +10,16 @@ FirmRecord::~FirmRecord(void)
 
 void FirmRecord::print(){
 
-	//cout << "\tname: " << name << endl;
-	//cout << "\tphone: " << phone << endl;
-	//cout << "\taddress: " << address << endl;
+	cout << "FIRMA" <<endl;
+	cout << "\tname: " << name << endl;
+	cout << "\tphone: " << phone << endl;
+	cout << "\taddress: " << address << endl;
 }
 
 
 Record* FirmRecord::create(){
 
+	FirmRecord* firm = new FirmRecord();
 	cout << "Podaj nazwe firmy: ";
 	cin >> name;
 	cout << "Podaj telefon firmy: ";
@@ -25,6 +27,10 @@ Record* FirmRecord::create(){
 	cout << "Podaj adres firmy: ";
 	cin >> address;
 	return this;
+}
+string FirmRecord::getSearchValue(){
+
+	return name;
 }
 
 ostream & operator<< (ostream &out,  Record& record){
