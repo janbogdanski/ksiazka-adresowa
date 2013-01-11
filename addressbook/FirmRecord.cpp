@@ -2,6 +2,7 @@
 
 FirmRecord::FirmRecord(void)
 {
+	type = 1;
 }
 
 FirmRecord::~FirmRecord(void)

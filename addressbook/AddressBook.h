@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <array>
 
 #include "Except.h"
 #include "Base.h"
@@ -29,6 +30,17 @@ public:
 	void print();
 
 	~AddressBook();
+
+	/**
+	1 - Firma
+	2 - Osoba prywatna
+	*/
+	vector<int> types;
+	vector<string> labels;
+	vector <int>::iterator intItr;
+
+	int type;
+
 
 
 

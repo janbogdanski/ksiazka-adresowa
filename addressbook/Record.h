@@ -14,6 +14,7 @@ public:
 		return new Record();
 	};
 	virtual string getSearchValue(){ return string();};
+	int type;
 	//string name, surname, address, phone;
 
 };
