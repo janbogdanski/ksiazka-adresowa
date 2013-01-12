@@ -282,7 +282,7 @@ ostream & operator<< (ostream &out, const AddressBook& book){
 	//}
 	for(int i = 0; i < book.records.size(); i++){
 		out << "wpis " << i + 1<<endl;
-		out << book.records[i];
+		book.records[i]->print();
 	}
 	return out;
 }
