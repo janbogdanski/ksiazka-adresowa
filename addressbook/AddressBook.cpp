@@ -46,6 +46,7 @@ int AddressBook::insert(){
 		record = new FirmRecord();
 		size = sizeof(FirmRecord);
 	} else{
+		return 1;
 		record = new FirmRecord();
 		size = sizeof(FirmRecord);
 	}
@@ -82,6 +83,8 @@ int AddressBook::rm(){
 
 			//znaleziono rekord w bazie - usuwamy go i wczytujemy baze ponownie
 			rewrite = true;
+			cout << "usuwam rekord: " <<endl;
+			records[i]->print();
 			records.erase(records.begin() + i);
 		}
 	}
