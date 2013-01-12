@@ -38,7 +38,8 @@ int main(){
 			case 2:
 				try{
 
-					cout << book.find() << endl;
+					//book.find().print();
+					book.find();
 					//book.find().print();
 				}catch(Except& e){
 					cout <<e.what();
@@ -48,8 +49,8 @@ int main(){
 				break;
 
 			case 3:
-				cout << book;
-				//book.print();
+				//cout << book;
+				book.print();
 				system ("pause");
 
 
@@ -62,8 +63,12 @@ int main(){
 				break;
 			case 5: exit(1);
 				break;
+
+			case 9: 
+				book.clear();
+				break;
 			default:
-				book.print();
+				book.rm();
 				system ("pause");
 
 				break;
