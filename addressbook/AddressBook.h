@@ -10,11 +10,12 @@
 #include "Base.h"
 #include "Record.h"
 #include "FirmRecord.h"
+#include "PrivateRecord.h"
 class AddressBook :
 	public Base
 {
 public:
-	friend ostream & operator<< (ostream &out, const AddressBook& book);
+	//friend ostream & operator<< (ostream &out, const AddressBook& book);
 	fstream data;
 	//Record recordss[];
 	vector <Record*> records;
@@ -28,6 +29,7 @@ public:
 	int rm();
 	int find();
 	void print();
+	void clear();
 
 	~AddressBook();
 

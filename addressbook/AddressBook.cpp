@@ -43,8 +43,8 @@ int AddressBook::insert(){
 		record = new FirmRecord();
 		size = sizeof(FirmRecord);
 	} else if(type == 2){
-		record = new FirmRecord();
-		size = sizeof(FirmRecord);
+		record = new PrivateRecord();
+		size = sizeof(PrivateRecord);
 	} else{
 		return 1;
 		record = new FirmRecord();
@@ -164,8 +164,7 @@ void AddressBook::reload(){
 	data.seekg(0, ios::beg);
 
 	int type;
-	//FirmRecord *record = new FirmRecord();
-	Record *record2 = new FirmRecord();
+
 
 	//czyscimy wektor (wazne!)
 	records.clear();
@@ -183,18 +182,18 @@ void AddressBook::reload(){
 				records.push_back(new FirmRecord(*record));
 			}
 		} else if(type == 2){
-			FirmRecord *record = new FirmRecord();
+			PrivateRecord *record = new PrivateRecord();
 			data.read((char*)record,sizeof(FirmRecord));
 			if(! data.eof()){
 
-				records.push_back(new FirmRecord(*record));
+				records.push_back(new PrivateRecord(*record));
 			}
 		} else{
-			FirmRecord *record = new FirmRecord();
-			data.read((char*)record,sizeof(FirmRecord));
+			//FirmRecord *record = new FirmRecord();
+			//data.read((char*)record,sizeof(FirmRecord));
 			if(! data.eof()){
 
-				records.push_back(new FirmRecord(*record));
+				//records.push_back(new FirmRecord(*record));
 			}
 		}
 	}
@@ -220,21 +219,34 @@ void AddressBook::writeDb(){
 
 	data.seekg(0, ios::end);
 	for (int i = 0; i < records.size(); i++)
-	//for (it = records.begin(); it != records.end() ; it++)
+		//for (it = records.begin(); it != records.end() ; it++)
 
 	{
 		//cout << records[i];
 		//cout << "";
 		//(*it)->print();
 		data.write((const char*)&records[i]->type, sizeof(int));
+		//data.write((const char*)records[i], sizeof(FirmRecord));
+
+
+		if(records[i]->type == 1){
+
 		data.write((const char*)records[i], sizeof(FirmRecord));
+			
+		} else if(records[i]->type == 2){
+		data.write((const char*)records[i], sizeof(PrivateRecord));
+			
+		} else{
+		data.write((const char*)records[i], sizeof(FirmRecord));
+			
+		}
 
 		//cout << (*it) << endl;
 		//cout << (*it) << endl;
-				//data.write((const char*)(*it)->type, sizeof(int));
+		//data.write((const char*)(*it)->type, sizeof(int));
 		//data.write((const char*)(*it), sizeof(FirmRecord));
 
-			//data.write((const char*)(it), sizeof(FirmRecord));
+		//data.write((const char*)(it), sizeof(FirmRecord));
 	}
 
 	//for(int i = 0; i < records.size(); i++){
@@ -251,6 +263,14 @@ AddressBook::~AddressBook()
 {
 }
 
+void AddressBook::clear(){
+
+	data.close();
+	data.open("base.txt", ios_base::in | ios_base::out | ios_base::trunc);
+	reload();
+
+
+}
 ostream & operator<< (ostream &out, const AddressBook& book){
 
 	system("cls");

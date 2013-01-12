@@ -14,7 +14,7 @@ public:
 
 	string getSearchValue();
 
-	string name, phone, address;
+	string firmName, regon, address;
 
 	int getSize(){ return sizeof(FirmRecord); }
 };
