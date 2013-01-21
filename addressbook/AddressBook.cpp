@@ -28,7 +28,13 @@ int AddressBook::insert(){
 		//printuje powiazana etykiete typu rekordu
 		cout << types[i] << ": " << labels[i] << endl;
 	}
-	cin >> (int)type;
+	if(!(cin >> type)){
+		cin.clear();
+		cin.ignore();
+		cout << endl << "Blad! Podaj typ:" << endl;
+
+		cin >> type;
+	}
 
 	Record* record;
 	int size;
@@ -41,9 +47,9 @@ int AddressBook::insert(){
 		record = new PrivateRecord();
 		size = sizeof(PrivateRecord);
 	} else{
+
+		//fake
 		return 1;
-		record = new FirmRecord();
-		size = sizeof(FirmRecord);
 	}
 
 	record->create();
@@ -70,8 +76,6 @@ int AddressBook::rm(){
 	string search;
 	cout << "Wpisz >>identyfikator<< rekordu do usuniecia: ";
 	cin >> search;
-
-	it = records.begin();
 
 	for(int i = 0; i < records.size(); i++){
 		if(records[i]->getSearchValue().compare(search) == 0){

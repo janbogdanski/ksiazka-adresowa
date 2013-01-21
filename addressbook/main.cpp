@@ -25,7 +25,14 @@ int main(){
 		cout << "-------------------------------"<< endl<< endl;
 
 		cout << "wybierz akcje: ";
-		cin >> (int)action;
+
+		if(!(cin >> action)){
+		cin.clear();
+		cin.ignore();
+		cout << endl << "Blad! Wybierz akcje:" << endl;
+
+		cin >> action;
+	}
 		system("cls");
 		switch(action){
 
