@@ -5,9 +5,9 @@ using namespace std;
 class Base
 {
 public:
-	Base();
+	Base(){};
 	virtual void print() = 0;
 
-	~Base();
+	~Base(){};
 
 };

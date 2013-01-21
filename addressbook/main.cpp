@@ -16,10 +16,10 @@ int main(){
 		system("cls");
 		cout << "Ksiazka adresowa" << endl << endl;
 		cout << "-----------------MENU----------" << endl<< endl;
-		cout << "1. Dodaj nowa osobe"<< endl;
-		cout << "2. Wyszukaj osobe po nazwisku"<< endl;
+		cout << "1. Dodaj nowy rekord"<< endl;
+		cout << "2. Wyszukaj rekord po >>identyfikatorze<<"<< endl;
 		cout << "3. Drukuj ksiazke"<< endl;
-		cout << "4. Usun osobe"<< endl;
+		cout << "4. Usun rekord"<< endl;
 		cout << "5. Zamknij"<< endl
 			<< endl;
 		cout << "-------------------------------"<< endl<< endl;
@@ -38,9 +38,9 @@ int main(){
 			case 2:
 				try{
 
-					//book.find().print();
+					//wyszukaj i wyswietl znalezione
 					book.find();
-					//book.find().print();
+
 				}catch(Except& e){
 					cout <<e.what();
 				}
@@ -49,8 +49,8 @@ int main(){
 				break;
 
 			case 3:
-				//cout << book;
-				book.print();
+				cout << book;
+				//book.print();
 				system ("pause");
 
 

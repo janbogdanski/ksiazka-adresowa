@@ -9,13 +9,7 @@ AddressBook::AddressBook()
 	types.push_back(2);
 	labels.push_back("Firma");
 	labels.push_back("Prywatna");
-	//int types []= {1,2}; 
-	//types [] = {1,2};
-	//types[0] = 1;
-	//types[1] = 2;
-	//labels[0] = "Firma";
-	//labels[1] = "Prywatna";
-	//string labels []= {'Firma', 'Prywatna'};
+	
 	reload();
 }
 
@@ -27,13 +21,14 @@ Tworzy instancje Record (cin wciaga odpowiednie dane) i zapisuje na koncu ksiazk
 int AddressBook::insert(){
 
 	cout << "Podaj typ rekordu" << endl;
-	//for (intItr = types.begin(); intItr != types.end() ; ++intItr){
+
+	//petla po dostepnych typach rekordow
 	for (int i = 0; i < types.size(); i++){
 
+		//printuje powiazana etykiete typu rekordu
 		cout << types[i] << ": " << labels[i] << endl;
-		//cout << *intItr;
 	}
-	cin >> type;
+	cin >> (int)type;
 
 	Record* record;
 	int size;
@@ -73,7 +68,7 @@ int AddressBook::rm(){
 
 	//wyszukiwane slowo(nazwisko)
 	string search;
-	cout << "Wpisz nazwisko osoby do usuniecia: ";
+	cout << "Wpisz >>identyfikator<< rekordu do usuniecia: ";
 	cin >> search;
 
 	it = records.begin();
@@ -106,7 +101,7 @@ int AddressBook::find(){
 
 	bool found = false;
 	string search;
-	cout << "Wpisz nazwisko osoby do wyszukania: ";
+	cout << "Wpisz >>identyfikator<< rekordu do wyszukania: ";
 	cin >> search;
 
 	for (it = records.begin(); it != records.end() ; ++it)
@@ -136,12 +131,6 @@ void AddressBook::print(){
 	{
 		(*it)->print();
 	}
-	////for(int i = 0; i < records.size(); i++){
-	//cout << "wpis " << i + 1 << endl;
-
-	//records[i].print();
-	//cout << records[i];
-	//}
 }
 
 /*
@@ -183,18 +172,13 @@ void AddressBook::reload(){
 			}
 		} else if(type == 2){
 			PrivateRecord *record = new PrivateRecord();
-			data.read((char*)record,sizeof(FirmRecord));
+			data.read((char*)record,sizeof(PrivateRecord));
 			if(! data.eof()){
 
 				records.push_back(new PrivateRecord(*record));
 			}
 		} else{
-			//FirmRecord *record = new FirmRecord();
-			//data.read((char*)record,sizeof(FirmRecord));
-			if(! data.eof()){
-
-				//records.push_back(new FirmRecord(*record));
-			}
+			//jakies smieci..
 		}
 	}
 }
@@ -218,15 +202,8 @@ void AddressBook::writeDb(){
 	}
 
 	data.seekg(0, ios::end);
-	for (int i = 0; i < records.size(); i++)
-		//for (it = records.begin(); it != records.end() ; it++)
-
-	{
-		//cout << records[i];
-		//cout << "";
-		//(*it)->print();
+	for (int i = 0; i < records.size(); i++){
 		data.write((const char*)&records[i]->type, sizeof(int));
-		//data.write((const char*)records[i], sizeof(FirmRecord));
 
 
 		if(records[i]->type == 1){
@@ -240,28 +217,9 @@ void AddressBook::writeDb(){
 		data.write((const char*)records[i], sizeof(FirmRecord));
 			
 		}
-
-		//cout << (*it) << endl;
-		//cout << (*it) << endl;
-		//data.write((const char*)(*it)->type, sizeof(int));
-		//data.write((const char*)(*it), sizeof(FirmRecord));
-
-		//data.write((const char*)(it), sizeof(FirmRecord));
 	}
-
-	//for(int i = 0; i < records.size(); i++){
-
-	//w petli wpisujemy zawartosc wektora do pliku
-	//data.write((const char*)&records[i], sizeof(records[i]));
-	//}
 }
 
-/*
-
-*/
-AddressBook::~AddressBook()
-{
-}
 
 void AddressBook::clear(){
 
@@ -276,10 +234,6 @@ ostream & operator<< (ostream &out, const AddressBook& book){
 	system("cls");
 
 	out << "operatorem" << endl;
-	//for (it = book.records.begin(); it != book.records.end() ; ++it)
-	//{
-	//(*it)->print();
-	//}
 	for(int i = 0; i < book.records.size(); i++){
 		out << "wpis " << i + 1<<endl;
 		book.records[i]->print();

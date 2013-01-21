@@ -5,8 +5,6 @@ class FirmRecord :
 	public Record
 {
 public:
-	friend ostream & operator<< (ostream &out, const Record& record);
-
 	FirmRecord(void);
 	~FirmRecord(void);
 	void print();
@@ -16,5 +14,5 @@ public:
 
 	string firmName, regon, address;
 
-	int getSize(){ return sizeof(FirmRecord); }
+	//int getSize(){ return sizeof(FirmRecord); }
 };

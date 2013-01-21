@@ -5,9 +5,6 @@ PrivateRecord::PrivateRecord(void)
 	type = 2;
 }
 
-PrivateRecord::~PrivateRecord(void)
-{
-}
 
 void PrivateRecord::print(){
 
@@ -40,12 +37,3 @@ string PrivateRecord::getSearchValue(){
 	return surname;
 }
 
-//ostream & operator<< (ostream &out,  Record& record){
-
-
-	//out << "operatorem firma" <<endl;
-	//out << "\tname: " << record.name << endl;
-	//out << "\taddress: " << record.address << endl;
-	//out << "\tphone: " << record.phone << endl << endl;;
-//return out;
-//}

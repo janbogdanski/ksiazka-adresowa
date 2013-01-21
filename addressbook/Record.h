@@ -1,13 +1,13 @@
 #pragma once
+#include <iostream>
+#include <string>
 #include "Except.h"
 
-#include "Base.h"
-class Record// : public Base
+
+class Record
 {
 public:
-	friend ostream & operator<< (ostream &out, const Record& record);
-	Record(void);
-	~Record(void);
+	Record(void){};
 	virtual void print(){};
 
 	virtual Record* create(){
@@ -15,7 +15,7 @@ public:
 	};
 	virtual string getSearchValue(){ return string();};
 	int type;
-	//string name, surname, address, phone;
+	//wlasciwosi przeniesione do konkretnych instancji
 
 };
 

@@ -3,8 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include <algorithm>
-#include <array>
+
 
 #include "Except.h"
 #include "Base.h"
@@ -17,13 +16,10 @@ class AddressBook :
 public:
 	friend ostream & operator<< (ostream &out, const AddressBook& book);
 	fstream data;
-	//Record recordss[];
 	vector <Record*> records;
 	vector <Record*>::iterator it;
 
-	//vector <int> records;
 	AddressBook();
-	//AddressBook(const int& in);
 
 	int insert();
 	int rm();
@@ -31,24 +27,18 @@ public:
 	void print();
 	void clear();
 
-	~AddressBook();
-
 	/**
 	1 - Firma
 	2 - Osoba prywatna
 	*/
 	vector<int> types;
 	vector<string> labels;
-	vector <int>::iterator intItr;
 
 	int type;
-
-
 
 
 private:
 	void reload();
 	void writeDb();
-	//data;
 };
 

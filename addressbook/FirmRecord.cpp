@@ -5,9 +5,7 @@ FirmRecord::FirmRecord(void)
 	type = 1;
 }
 
-FirmRecord::~FirmRecord(void)
-{
-}
+
 
 void FirmRecord::print(){
 
@@ -32,12 +30,3 @@ string FirmRecord::getSearchValue(){
 	return firmName;
 }
 
-//ostream & operator<< (ostream &out,  Record& record){
-
-
-	//out << "operatorem firma" <<endl;
-	//out << "\tname: " << record.name << endl;
-	//out << "\taddress: " << record.address << endl;
-	//out << "\tphone: " << record.phone << endl << endl;;
-//return out;
-//}
